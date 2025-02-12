@@ -49,11 +49,7 @@ namespace bbb {
             return *this;
         };
         
-//        void operator()(value_type new_value)
-//        { *this = new_value; }
-        
-        std::function<void(value_type)> callee()
-        { return [this](value_type v) { *this = v; }; }
+        const std::function<void(value_type)> notify{[this](value_type v) { *this = v; }};
         
         operator value_type() const { return v; };
         operator value_type &() { return v; };
