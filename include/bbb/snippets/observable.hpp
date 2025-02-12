@@ -49,6 +49,8 @@ namespace bbb {
         void operator()(value_type new_value)
         { *this = new_value; }
         
+        std::function<void(value_type)> callee()
+        { return [this](value_type v) mutable { *this = v; }; }
         operator value_type() const { return v; };
         operator value_type &() { return v; };
         value_type operator()() const { return v; };
