@@ -43,7 +43,7 @@ namespace bbb {
             if(change && v != new_value) change(v, new_value);
             v = new_value;
             if(assign) assign(v);
-            return v;
+            return *this;
         };
         
         void operator()(value_type new_value)
