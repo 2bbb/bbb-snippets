@@ -12,6 +12,9 @@ namespace bbb {
         using change_notification_t = std::function<void(value_type, value_type)>;
         
         observable() = default;
+        observable(const observable &) = default;
+        observable(observable &&) = default;
+        
         observable(value_type v,
                 assign_notification_t assign,
                 change_notification_t change)
@@ -46,11 +49,12 @@ namespace bbb {
             return *this;
         };
         
-        void operator()(value_type new_value)
-        { *this = new_value; }
+//        void operator()(value_type new_value)
+//        { *this = new_value; }
         
         std::function<void(value_type)> callee()
-        { return [this](value_type v) mutable { *this = v; }; }
+        { return [this](value_type v) { *this = v; }; }
+        
         operator value_type() const { return v; };
         operator value_type &() { return v; };
         value_type operator()() const { return v; };
