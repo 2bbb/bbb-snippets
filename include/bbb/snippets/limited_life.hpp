@@ -161,8 +161,9 @@ namespace bbb {
         
 		base_type &operator()() noexcept { return v; }
 		const base_type &operator()() const noexcept { return v; }
-		base_type *operator->() const noexcept { return &v; }
-        base_type& operator*() const noexcept { return v; };
+        base_type *operator->() noexcept { return &v; }
+		const base_type *operator->() const noexcept { return &v; }
+        base_type &operator*() const noexcept { return v; };
         
 		friend
 		auto copy(const std::vector<base_type> &src, std::vector<limited_life> &vs) {
