@@ -4,8 +4,8 @@
 //  Created by 2bit on 2025/02/14.
 //
 
-#ifndef initialize_once_h
-#define initialize_once_h
+#ifndef bbb_snippets_initialize_once_hpp
+#define bbb_snippets_initialize_once_hpp
 
 #include <type_traits>
 
@@ -53,4 +53,4 @@ namespace bbb {
     };
 };
 
-#endif /* initialize_once_h */
+#endif /* bbb_snippets_initialize_once_hpp */

@@ -1,9 +1,16 @@
+//
+//  bbb/snippets/observable.hpp
+//
+//  Created by 2bit on 2025/02/14.
+//
+
 #pragma once
 
-#ifndef BBB_OBSERVABLE_HPP
-#define BBB_OBSERVABLE_HPP
+#ifndef bbb_snippets_observable_hpp
+#define bbb_snippets_observable_hpp
 
 #include <functional>
+#include <type_traits>
 
 namespace bbb {
     template <typename value_type>
@@ -68,4 +75,4 @@ namespace bbb {
     };
 }; // namespace bbb
 
-#endif // BBB_OBSERVABLE_HPP
+#endif // bbb_snippets_observable_hpp

@@ -1,7 +1,13 @@
+//
+//  bbb/snippets/inline_static_variable.hpp
+//
+//  Created by 2bit on 2025/02/14.
+//
+
 #pragma once
 
-#ifndef BBB_INLINE_STATIC_VARIABLE_HPP
-#define BBB_INLINE_STATIC_VARIABLE_HPP
+#ifndef bbb_snippets_inline_static_variable_hpp
+#define bbb_snippets_inline_static_variable_hpp
 
 namespace bbb {
 	template <typename type, typename tag = void>
@@ -20,4 +26,4 @@ namespace bbb {
 	};
 }; // namespace bbb
 
-#endif // BBB_INLINE_STATIC_VARIABLE_HPP
+#endif // bbb_snippets_inline_static_variable_hpp

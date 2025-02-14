@@ -1,6 +1,13 @@
+//
+//  bbb/snippets/limited_life.hpp
+//
+//  Created by 2bit on 2025/02/14.
+//
+
 #pragma once
-#ifndef BBB_LIMITED_LIFE_HPP
-#define BBB_LIMITED_LIFE_HPP
+
+#ifndef bbb_snippets_limited_life_hpp
+#define bbb_snippets_limited_life_hpp
 
 #include <type_traits>
 #include <chrono>
@@ -187,4 +194,4 @@ namespace bbb {
 	};
 }; // namespace bbb
 
-#endif // BBB_LIMITED_LIFE_HPP
+#endif // bbb_snippets_limited_life_hpp
