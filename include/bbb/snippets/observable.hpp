@@ -16,15 +16,16 @@ namespace bbb {
     template <typename value_type>
     struct observable {
         using assign_notification_t = std::function<void(value_type)>;
-        using change_notification_t = std::function<void(value_type, value_type)>;
-        
+        using change_notification_t = std::function<bool(value_type, value_type)>;
+        using void_change_notification_t = std::function<void(value_type, value_type)>;
+
         observable() = default;
         observable(const observable &) = default;
         observable(observable &&) = default;
         
         observable(value_type v,
-                assign_notification_t assign,
-                change_notification_t change)
+                   assign_notification_t assign,
+                   change_notification_t change)
         : v{v}
         , assign{assign}
         , change{change}
@@ -50,8 +51,15 @@ namespace bbb {
         observable &operator=(const observable &) = default;
         observable &operator=(observable &&) = default;
         observable &operator=(value_type new_value) {
-            if(change && v != new_value) change(v, new_value);
-            v = new_value;
+            if(change) {
+                if(v != new_value) {
+                    if(change(v, new_value)) {
+                        v = new_value;
+                    }
+                }
+            } else {
+                v = new_value;
+            }
             if(assign) assign(v);
             return *this;
         };
@@ -64,10 +72,35 @@ namespace bbb {
         value_type &operator()() { return v; };
         
         observable &on_assign(assign_notification_t assign)
-        { this->assign = assign; return *this; } 
-        observable &on_change(change_notification_t change)
-        { this->change = change; return *this; } 
+        { this->assign = assign; return *this; }
         
+        template <typename change_notification_callback_t>
+        auto on_change(change_notification_callback_t change)
+            -> typename std::enable_if<
+                std::is_same<
+                    decltype(std::declval<change_notification_callback_t>()(value_type{}, value_type{})),
+                    bool
+                >::value,
+                observable &
+            >::type
+        { this->change = change; return *this; }
+        
+        template <typename change_notification_callback_t>
+        auto on_change(change_notification_callback_t change)
+            -> typename std::enable_if<
+                std::is_same<
+                    decltype(std::declval<change_notification_callback_t>()(value_type{}, value_type{})),
+                    void
+                >::value,
+                observable &
+            >::type
+        {
+            return on_change([change](value_type from, value_type to) -> bool {
+                change(from, to);
+                return true;
+            });
+        }
+
     protected:
         assign_notification_t assign{};
         change_notification_t change{};
