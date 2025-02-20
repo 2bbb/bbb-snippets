@@ -12,5 +12,6 @@
 #include "./snippets/inline_static_variable.hpp"
 #include "./snippets/limited_life.hpp"
 #include "./snippets/observable.hpp"
+#include "./snippets/noncopyable.hpp"
 
 #endif /* bbb_snippets_hpp */
